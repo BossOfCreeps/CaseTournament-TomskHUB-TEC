@@ -20,3 +20,5 @@ CREATE TABLE maintable
 INSERT INTO `maintable` VALUES (1, 'seva_name', '1997-06-07', 3.14, 0.1, 0.2, 0.3, 'oxygen', TRUE);
 
 SELECT * FROM maintable;
+
+SET GLOBAL read_only = ON;
