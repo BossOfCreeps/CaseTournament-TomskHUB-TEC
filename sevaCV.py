@@ -35,10 +35,10 @@ while True:
         print(decodedObjects[0].data.decode())
         print(insert_into_sql(decodedObjects[0].data.decode()))
         frame = cv2.imread("working.png")
-    
 
-    cv2.namedWindow("test", cv2.WND_PROP_FULLSCREEN)          
-    cv2.setWindowProperty("test", cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
+
+    cv2.namedWindow("test",cv2. WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("test", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     cv2.imshow("test",frame)
     
     if cv2.waitKey(1) == 27: 
