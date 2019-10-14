@@ -1,0 +1,9 @@
+pytesseract
+opencv-python
+pyzbar
+numpy
+pyqrcode
+pypng
+setuptools
+mysql-connector-python-rf
+pillow

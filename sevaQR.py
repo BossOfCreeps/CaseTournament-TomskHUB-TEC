@@ -25,6 +25,7 @@ def recognise_QR(im):
         return "many QR codes"
 
 
-generate_QR((1, 'polya_name', "1997.10.4", 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1))
-im = cv2.imread('code.png')
+#generate_QR("'lesha', '1997.10.4', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1")
+'''im = cv2.imread('code.png')
 print(recognise_QR(im)[0].data.decode())
+'''

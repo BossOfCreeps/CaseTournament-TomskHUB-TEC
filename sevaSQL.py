@@ -25,8 +25,9 @@ def insert_into_sql(data):
     try:
         connection = mysql.connector.connect(host='34.90.47.156', database='testdb', user='seva', password='rachis')
         cursor = connection.cursor()
-        data = (len(select_sql()) + 1,) + data
-        cursor.execute("INSERT INTO `maintable` VALUES " + str(data) + ";")
+        #data = (len(select_sql()) + 1,) + data
+        print("INSERT INTO `maintable` VALUES (" + str(len(select_sql()) + 1) + ", " + data + ");")
+        cursor.execute("INSERT INTO `maintable` VALUES (" + str(len(select_sql()) + 1) + ", " + data + ");")
         connection.commit()
         connection.close()
         cursor.close()
@@ -46,8 +47,8 @@ def delete_sql():
     except Error as e:
         return "Error reading data from MySQL table"+str(e)
 
-#data = ("polya_name", "1997-10-04", 3.14, 0.1, 0.2, 0.4, "oxygen2", 1)
-#print(select_sql())
+#data = "'polya_name', '1997-10-04', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1"
+print(select_sql())
 #print(insert_into_sql(data))
 #print(delete_sql())
 
