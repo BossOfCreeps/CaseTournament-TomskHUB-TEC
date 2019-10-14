@@ -7,6 +7,7 @@ from tkinter import *
 from sevaQR import *
 from sevaSQL import *
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
+from time import *
 
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
@@ -16,11 +17,33 @@ cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
+class FullScreenApp(object):
+    def __init__(self, master, **kwargs):
+        self.master=master
+        pad=3
+        self._geom='200x200+0+0'
+        master.geometry("{0}x{1}+0+0".format(
+            master.winfo_screenwidth()-pad, master.winfo_screenheight()-pad))
+        master.bind('<Escape>',self.toggle_geom)            
+    def toggle_geom(self,event):
+        geom=self.master.winfo_geometry()
+        print(geom,self._geom)
+        self.master.geometry(self._geom)
+        self._geom=geom
+
 root = Tk()
+
+# make it cover the entire screen
+w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+root.overrideredirect(1)
+root.geometry("%dx%d+0+0" % (w, h))
+
 root.bind('<Escape>', lambda e: root.quit())
 lmain = Label(root)
 lmain.pack()
-a=0
+
+
+
 def show_frame():
 
     _, frame = cap.read()
@@ -37,11 +60,13 @@ def show_frame():
         for j in range(0, len(hull)):
             cv2.line(frame, hull[j], hull[(j + 1) % len(hull)], (255, 0, 0), 3)
 
-    global a
+    press_button = False
+    
     if (GPIO.input(36) == GPIO.HIGH) and (decodedObjects != "no QR codes") and (decodedObjects != "many QR codes"):
         print(decodedObjects[0].data.decode())
         print(insert_into_sql(decodedObjects[0].data.decode()))
-        
+        frame = cv2.imread("working.png")
+
     frame = cv2.flip(frame, 1)
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
     img = PIL.Image.fromarray(cv2image)
