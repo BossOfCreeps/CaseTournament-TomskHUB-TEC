@@ -5,9 +5,9 @@ import cv2
 import pyqrcode, png, sys
 
 
-def generate_QR(data):
+def generate_QR(name, data):
     big_code = pyqrcode.create(str(data))
-    big_code.png('code.png', scale=6, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xff])
+    big_code.png(name +'.png', scale=6, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xff])
     return "generate_QR"
 
 

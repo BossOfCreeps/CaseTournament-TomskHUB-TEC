@@ -1,13 +1,20 @@
 from tkinter import *
 from tkinter import messagebox
-import sevaSQL
 from sevaSQL import *
+from sevaQR import *
+
+
 
 def button_click():
+
+    
     #sevaSQL.insert_into_sql
-    print(insert_into_sql((name.get(), date.get(), float(weight.get()), float(dimensions_x.get()), float(dimensions_y.get()), float(dimensions_z.get()), composition.get(), int(qual_control.get()))))
+    print(insert_into_sql(name.get() + date.get() + float(weight.get()) + float(dimensions_x.get()) + float(dimensions_y.get()) + float(dimensions_z.get()) + composition.get() + int(qual_control.get())))
     # messagebox.showinfo("GUI Python", name.get() + " " + date.get())
 
+def generate_QR_code():
+    global name, date, weight, dimensions_x, dimensions_y, dimensions_z, composition, qual_control
+    generate_QR(name.get(), name.get() + date.get() + float(weight.get()) + float(dimensions_x.get()) + float(dimensions_y.get()) + float(dimensions_z.get()) + composition.get() + int(qual_control.get()))
 
 root = Tk()
 root.title("GUI на Python")
@@ -57,7 +64,7 @@ composition_entry.grid(row=6, column=1, padx=3, pady=3)
 qual_control_entry = Entry(textvariable=qual_control)
 qual_control_entry.grid(row=7, column=1, padx=3, pady=3)
 
-message_button = Button(text="Send to DataBase", command=button_click)
+message_button = Button(text="Generate QR code", command=button_click)
 message_button.grid(row=8, column=1, padx=3, pady=3, sticky="e")
 
 
