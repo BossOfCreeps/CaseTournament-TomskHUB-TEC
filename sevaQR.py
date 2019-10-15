@@ -24,7 +24,8 @@ def recognise_QR(im):
     if len(decodedObjects) > 1:
         return "many QR codes"
 
-
+#text="'lesha', '1997.10.4', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1"
+#print(text[text.find("'")+1:text.find("'",2)])
 #generate_QR("'lesha', '1997.10.4', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1")
 '''im = cv2.imread('code.png')
 print(recognise_QR(im)[0].data.decode())

@@ -67,6 +67,13 @@ def show_frame():
         print(insert_into_sql(decodedObjects[0].data.decode()))
         frame = cv2.imread("working.png")
 
+    '''
+    if (GPIO.input(36) == GPIO.HIGH) and (decodedObjects != "no QR codes") and (decodedObjects != "many QR codes"):
+        print(decodedObjects[0].data.decode())
+        print(insert_into_sql(decodedObjects[0].data.decode()))
+        text[text.find("'")+1:text.find("'",2)])
+        frame = cv2.imread("working.png")
+    '''
     frame = cv2.flip(frame, 1)
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
     img = PIL.Image.fromarray(cv2image)

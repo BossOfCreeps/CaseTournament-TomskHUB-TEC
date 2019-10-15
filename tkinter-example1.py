@@ -1,20 +1,24 @@
 from tkinter import *
 from tkinter import messagebox
-from sevaSQL import *
+#from sevaSQL import *
 from sevaQR import *
+import os
 
-
-
-def button_click():
+#def button_click():
 
     
     #sevaSQL.insert_into_sql
-    print(insert_into_sql(name.get() + date.get() + float(weight.get()) + float(dimensions_x.get()) + float(dimensions_y.get()) + float(dimensions_z.get()) + composition.get() + int(qual_control.get())))
+    # print(insert_into_sql(name.get() + date.get() + float(weight.get()) + float(dimensions_x.get()) + float(dimensions_y.get()) + float(dimensions_z.get()) + composition.get() + int(qual_control.get())))
     # messagebox.showinfo("GUI Python", name.get() + " " + date.get())
 
 def generate_QR_code():
     global name, date, weight, dimensions_x, dimensions_y, dimensions_z, composition, qual_control
-    generate_QR(name.get(), name.get() + date.get() + float(weight.get()) + float(dimensions_x.get()) + float(dimensions_y.get()) + float(dimensions_z.get()) + composition.get() + int(qual_control.get()))
+    generate_QR(name.get(), "'"+name.get() + "', '" + date.get() + "', " + weight.get() + ", " + dimensions_x.get() + ", " + dimensions_y.get() + ", " + dimensions_z.get()  + ", '" + composition.get() +"', '"+ qual_control.get()+"'")
+
+def print_QR_code():
+    global name
+    os.startfile(name.get()+".png", "print")
+
 
 root = Tk()
 root.title("GUI на Python")
@@ -44,8 +48,10 @@ composition_label = Label(text="Состав:")
 composition_label.grid(row=6, column=0, sticky="w")
 qual_control_label = Label(text="Отметка о прохождении контроля качества:")
 qual_control_label.grid(row=7, column=0, sticky="w")
-qual_control_label = Label(text="Отправить:")
-qual_control_label.grid(row=8, column=0, sticky="w")
+gen_qr_label = Label(text="Сгенерировать QR:")
+gen_qr_label.grid(row=8, column=0, sticky="w")
+print_qr_label = Label(text="Напечатать QR:")
+print_qr_label.grid(row=9, column=0, sticky="w")
 
 name_entry = Entry(textvariable=name)
 name_entry.grid(row=0, column=1, padx=3, pady=3)
@@ -64,11 +70,13 @@ composition_entry.grid(row=6, column=1, padx=3, pady=3)
 qual_control_entry = Entry(textvariable=qual_control)
 qual_control_entry.grid(row=7, column=1, padx=3, pady=3)
 
-message_button = Button(text="Generate QR code", command=button_click)
-message_button.grid(row=8, column=1, padx=3, pady=3, sticky="e")
+gen_qr_button = Button(text="Сгенерировать QR code", command=generate_QR_code)
+gen_qr_button.grid(row=8, column=1, padx=3, pady=3, sticky="e")
+print_qr_button = Button(text="Напечатать QR code", command=print_QR_code)
+print_qr_button.grid(row=9, column=1, padx=3, pady=3, sticky="e")
 
 
-print(sevaSQL.select_sql())
+#print(sevaSQL.select_sql())
 
 root.mainloop()
 

@@ -35,11 +35,11 @@ def insert_into_sql(data):
     except Error as e:
         return "Error reading data from MySQL table"+str(e)
 
-def delete_sql():
+def delete_sql(name):
     try:
         connection = mysql.connector.connect(host='34.90.47.156', database='testdb', user='seva', password='rachis')
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM maintable")
+        cursor.execute("DELETE FROM maintable WHERE name = '"+name+"';")
         connection.commit()
         connection.close()
         cursor.close()
@@ -47,9 +47,23 @@ def delete_sql():
     except Error as e:
         return "Error reading data from MySQL table"+str(e)
 
+def delete_all_sql():
+    try:
+        connection = mysql.connector.connect(host='34.90.47.156', database='testdb', user='seva', password='rachis')
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM maintable")
+        connection.commit()
+        connection.close()
+        cursor.close()
+        return "delete_all_sql"
+    except Error as e:
+        return "Error reading data from MySQL table"+str(e)
+
+
 #data = "'polya_name', '1997-10-04', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1"
-print(select_sql())
+#print(delete_sql("polya_name"))
+#print(select_sql())
 #print(insert_into_sql(data))
-#print(delete_sql())
+#print(delete_all_sql())
 
 
