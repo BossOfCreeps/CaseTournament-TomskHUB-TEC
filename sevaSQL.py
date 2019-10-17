@@ -93,10 +93,11 @@ def update_sql(name, date, weight, dimensions_x, dimensions_y, dimensions_z, com
         return "Error reading data from MySQL table"+str(e)
 
 
-data = "'pasha', '1997-10-04', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1"
+text = "'pasha', '1997-10-04', 3.14, 0.1, 0.2, 0.4, 'oxygen2', 1"
+print (text[text.find("'")+1:text.find("'",2)])
 #print(delete_sql("polya_name"))
 #print(select_sql())
-#print(insert_into_sql(data))
+#print(insert_into_sql(text))
 #print(delete_all_sql())
 
 
